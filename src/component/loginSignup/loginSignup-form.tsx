@@ -1,23 +1,26 @@
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import { useState } from 'react';
 export const LoginSignupForm: React.FC = () => {
   const [form] = Form.useForm();
-  // const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  // const clickLogin = async () => {
-  //   try {
-  //     const values = await form.validateFields();
-  //     setLoading(true);
-  //     // Temporarily log the values instead of actual auth
-  //     console.log('Login values:', values);
-  //     message.success('Login submitted!');
-  //   } catch (error) {
-  //     message.error('Validation failed!');
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  // onFinish is called with validated form values
+  const onFinish = (values: { email: string; password: string }) => {
+    console.log('Login values:', values);
+
+    // Here you can do your login API call and validation
+    // For now, simulate success:
+    const loginSuccess = true;
+
+    if (loginSuccess) {
+      navigate('/dashboard'); // Redirect on success
+    } else {
+      alert('Login failed');
+    }
+  };
 
   return (
     <Form
@@ -25,7 +28,7 @@ export const LoginSignupForm: React.FC = () => {
       className="login-form"
       form={form}
       name="login-form"
-      // onFinish={clickLogin}
+      onFinish={onFinish}
     >
       <Form.Item
         name="email"
